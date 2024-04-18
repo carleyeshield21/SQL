@@ -1,3 +1,11 @@
+--**Query Principles by Order
+--select
+--from
+--where
+--group by
+--having
+--order by
+
 --*Creating Tables in SSMS
 --create table SportTeams
 --(TeamID int,TeamName ntext,Attack int,Defense int)

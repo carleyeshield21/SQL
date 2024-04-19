@@ -169,7 +169,34 @@
 --order by DATEPART(month,DateOfBirth) asc
 
 --*This will return more rows because we used year to order
-select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees, YEAR(DateOfBirth) as Year
-from [dbo].[70-461datau]
-group by DATENAME(month,DateOfBirth), YEAR(DateOfBirth)
-order by YEAR(DateOfBirth) asc
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees, YEAR(DateOfBirth) as Year
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth), YEAR(DateOfBirth)
+--order by YEAR(DateOfBirth) asc
+
+--*Displaying to another column the count of employees with not null MiddleNames
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees,
+--COUNT(EmployeeMiddleName) as MiddleNames
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth), DATEPART(MONTH,DateOfBirth)
+--order by DATEPART(month,DateOfBirth) asc
+
+--*Displaying the count of employees with no middle name listed from the table, and the earliest and latest date of birth as new columns
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees,
+--COUNT(EmployeeMiddleName) as MiddleNames,
+--COUNT(*) - COUNT(EmployeeMiddleName) as NoMiddleNameListed,
+--MIN(DateOfBirth) as EarlieastDateOfBirth,
+--MAX(DateOfBirth) as Latest_Date_Of_Birth
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth), DATEPART(MONTH,DateOfBirth)
+--order by DATEPART(month,DateOfBirth)
+
+--*With date format
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees,
+--COUNT(EmployeeMiddleName) as MiddleNames,
+--COUNT(*) - COUNT(EmployeeMiddleName) as NoMiddleNameListed,
+--format(MIN(DateOfBirth),'D') as EarlieastDateOfBirth,
+--format(MAX(DateOfBirth),'dd-MM-yyyy') as Latest_Date_Of_Birth
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth), DATEPART(MONTH,DateOfBirth)
+--order by DATEPART(month,DateOfBirth)

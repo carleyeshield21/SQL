@@ -134,3 +134,42 @@
 --having COUNT(*) >= 4
 --ORDER BY NumberOfRows
 --DESC, Attack;
+
+--Experimental Queries
+--select EmployeeFirstName as PersNeym,EmployeeMiddleName as MedelNeym, EmployeeLastName as Apelyido,DateOfBirth as ArawNgKapanganakan from [70-461datau]
+--where EmployeeMiddleName is not null and LEN(EmployeeMiddleName) > 2 and DateOfBirth > '19800101'
+--order by DateOfBirth desc
+
+--*Using count function will not work if we do not include group by function, here we output the month number
+--select DATEPART(month,DateOfBirth) as MonthNumber, COUNT(*) as NumberOfEmployees
+--from [dbo].[70-461datau]
+--group by DATEPART(month,DateOfBirth)
+
+--*Using count function will not work if we do not include group by function, here we output the month name
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth)
+
+--*We arrange in descending order using order by function using the Number of Employees
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth)
+--order by NumberOfEmployees desc
+
+--*Here we only have the date number ordered by month number in ascending order
+--select DATEPART(month,DateOfBirth) as MonthNumber, COUNT(*) as NumberOfEmployees
+--from [dbo].[70-461datau]
+--group by DATEPART(month,DateOfBirth)
+--order by DATEPART(month,DateOfBirth) asc
+
+--*Here we replaced the month number to its month name order by month by following the group by with a second condition DATEPART(MONTH,DateOfBirth)
+--select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees
+--from [dbo].[70-461datau]
+--group by DATENAME(month,DateOfBirth), DATEPART(MONTH,DateOfBirth)
+--order by DATEPART(month,DateOfBirth) asc
+
+--*This will return more rows because we used year to order
+select DATENAME(month,DateOfBirth) as MonthName, COUNT(*) as NumberOfEmployees, YEAR(DateOfBirth) as Year
+from [dbo].[70-461datau]
+group by DATENAME(month,DateOfBirth), YEAR(DateOfBirth)
+order by YEAR(DateOfBirth) asc

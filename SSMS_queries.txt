@@ -200,3 +200,32 @@
 --from [dbo].[70-461datau]
 --group by DATENAME(month,DateOfBirth), DATEPART(MONTH,DateOfBirth)
 --order by DATEPART(month,DateOfBirth)
+
+--*Converting an integer to a date format, you must convert first the integer to a string
+--SELECT CONVERT(date, CONVERT(varchar(10), DateOfTransaction), 112) AS ConvertedDate
+--FROM [dbo].[tblTransaction150707_csv]
+
+--*Querying about how many employees have the same first names
+--select EmployeeFirstName as FirstName, COUNT(*) as Repeated_Names
+--from [dbo].[70-461datau]
+--group by EmployeeFirstName
+--order by Repeated_Names desc
+
+--*Querying about how many employees have the same last names
+--select EmployeeLastName as Last_Name, COUNT(*) as Repeated_Last_Names
+--from [dbo].[70-461datau]
+--group by EmployeeLastName
+--order by Repeated_Last_Names desc
+
+--*Query on how many employees have the same middle name removing the nulls and the middle initials by creating a condition on having more the 2 characters
+--select EmployeeMiddleName as MiddleName, COUNT(*) as Middle_Name
+--from [dbo].[70-461datau]
+--group by EmployeeMiddleName
+--having LEN(EmployeeMiddleName) > 2
+--order by Middle_Name desc
+
+
+select EmployeeNumber as EmpNum, count(*) as NumEmployees
+from [dbo].[tblTransaction150707_csv]
+group by EmployeeNumber
+order by NumEmployees desc

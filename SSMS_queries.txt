@@ -224,8 +224,8 @@
 --having LEN(EmployeeMiddleName) > 2
 --order by Middle_Name desc
 
-
-select EmployeeNumber as EmpNum, count(*) as NumEmployees
-from [dbo].[tblTransaction150707_csv]
-group by EmployeeNumber
-order by NumEmployees desc
+--*Query on how many employees have the same employee number
+--select EmployeeNumber as EmpNum, count(*) as NumEmployees
+--from [dbo].[tblTransaction150707_csv]
+--group by EmployeeNumber
+--order by NumEmployees desc

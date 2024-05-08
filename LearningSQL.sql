@@ -100,5 +100,16 @@ select Household_Head_Highest_Grade_Completed, [Household_Head_Job_or_Business_I
 from [dbo].[Family Income and Expenditure] where [Household_Head_Job_or_Business_Indicator] = 'With Job/Business'
 select * from #temp_table2
 
+--creating a table view
+create view table_view as
+select Region, Household_Head_Class_of_Worker, Type_of_Household
+from [dbo].[Family Income and Expenditure]
+select * from table_view
+
+--query from table view
+select Region, Household_Head_Class_of_Worker, Type_of_Household
+from table_view
+where Type_of_Household = 'Single Family'
+
 use data_vase
 select * from [dbo].[Family Income and Expenditure]

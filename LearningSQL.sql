@@ -76,4 +76,29 @@ select concat (derived_table.Region,  ' AND ' , derived_table.Household_Head_Occ
 (SELECT Region, Household_Head_Occupation, Main_Source_of_Income
 FROM [dbo].[Family Income and Expenditure]  where Region = 'VI - Western Visayas' and Household_Head_Occupation = 'General managers/managing proprietors in transportation, storage and communications') AS derived_table
 
+select distinct Household_Head_Class_of_Worker, count (*) as count from [dbo].[Family Income and Expenditure]
+group by Household_Head_Class_of_Worker
+order by count
+
+--creating a temporary table
+create table #temp_table1
+(col1 int, col2 int, col3 int)
+select * from #temp_table1
+
+--inserting columns to temporary table from existing table
+insert into #temp_table1
+select Total_Food_Expenditure, Total_Rice_Expenditure, Vegetables_Expenditure
+from [dbo].[Family Income and Expenditure]
+select * from #temp_table1
+
+create table #temp_table2
+(col3 text, col4 text, col5 text)
+select * from #temp_table2
+
+insert into #temp_table2
+select Household_Head_Highest_Grade_Completed, [Household_Head_Job_or_Business_Indicator], [Household_Head_Occupation]
+from [dbo].[Family Income and Expenditure] where [Household_Head_Job_or_Business_Indicator] = 'With Job/Business'
+select * from #temp_table2
+
+use data_vase
 select * from [dbo].[Family Income and Expenditure]

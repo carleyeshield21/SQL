@@ -126,4 +126,17 @@ select * from [dbo].[Inpatient_provdr]
 --joining table
 SELECT *
 FROM [dbo].[Inpatient_Pat]
-INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition;
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+
+SELECT *
+FROM [dbo].[Inpatient_provdr]
+INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_Pat].DRG_Definition
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where [dbo].[Inpatient_Pat].Average_Medicare_Payments < 5000 and [dbo].[Inpatient_provdr].Provider_State = 'AZ'

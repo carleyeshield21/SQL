@@ -113,3 +113,17 @@ where Type_of_Household = 'Single Family'
 
 use data_vase
 select * from [dbo].[Family Income and Expenditure]
+
+select * from [dbo].[Inpatient_Pat]
+select * from [dbo].[Inpatient_provdr]
+
+--altering data type
+ALTER TABLE [dbo].[Inpatient_provdr]
+ALTER COLUMN DRG_Definition nvarchar(100) not null
+
+select * from [dbo].[Inpatient_Pat]
+select * from [dbo].[Inpatient_provdr]
+--joining table
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition;

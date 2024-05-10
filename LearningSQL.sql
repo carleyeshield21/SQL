@@ -187,4 +187,17 @@ INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [d
 where ([dbo].[Inpatient_provdr].Provider_City = 'BOSTON' or [dbo].[Inpatient_provdr].Provider_City = 'NEW YORK')
 group by [dbo].[Inpatient_provdr].Provider_City
 
+SELECT [dbo].[Inpatient_provdr].Provider_City, COUNT(*)
+FROM [dbo].[Inpatient_provdr]
+INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+group by [dbo].[Inpatient_provdr].Provider_City
+having COUNT(*) > 80000
+
+SELECT [dbo].[Inpatient_provdr].Provider_City, COUNT(*)
+FROM [dbo].[Inpatient_provdr]
+INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where ([dbo].[Inpatient_provdr].Provider_City = 'BOSTON' or [dbo].[Inpatient_provdr].Provider_City = 'NEW YORK')
+group by [dbo].[Inpatient_provdr].Provider_City
+having COUNT(*) > 70000
+
 use data_vase

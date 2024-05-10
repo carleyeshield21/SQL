@@ -157,3 +157,16 @@ FROM [dbo].[Inpatient_Pat]
 INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
 where ([dbo].[Inpatient_provdr].Average_Medicare_Payments < 2000 and [dbo].[Inpatient_Pat].Average_Medicare_Payments < 3000) and
 ([dbo].[Inpatient_provdr].Total_Discharges < 30000)
+
+--using joins with group by clause, when there is a count in the query, we must always use group by clause at the end
+SELECT [dbo].[Inpatient_Pat].DRG_Definition, count(*)
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where ([dbo].[Inpatient_provdr].Average_Medicare_Payments < 2000 and [dbo].[Inpatient_Pat].Average_Medicare_Payments < 3000) and
+([dbo].[Inpatient_provdr].Total_Discharges < 30000)
+group by [dbo].[Inpatient_Pat].DRG_Definition
+
+--Selecting all columns from joined tables
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition

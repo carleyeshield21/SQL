@@ -123,6 +123,7 @@ ALTER COLUMN DRG_Definition nvarchar(100) not null
 
 select * from [dbo].[Inpatient_Pat]
 select * from [dbo].[Inpatient_provdr]
+
 --joining table
 SELECT *
 FROM [dbo].[Inpatient_Pat]
@@ -139,4 +140,20 @@ INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [d
 SELECT *
 FROM [dbo].[Inpatient_Pat]
 INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
-where [dbo].[Inpatient_Pat].Average_Medicare_Payments < 5000 and [dbo].[Inpatient_provdr].Provider_State = 'AZ'
+where [dbo].[Inpatient_Pat].Average_Medicare_Payments < 5000 and [dbo].[Inpatient_provdr].Provider_State = 'CA' and [dbo].[Inpatient_provdr].Provider_City = 'oakland'
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where [dbo].[Inpatient_Pat].Average_Medicare_Payments < 5000 and [dbo].[Inpatient_provdr].Provider_State = 'CA' and [dbo].[Inpatient_provdr].Provider_City = 'oakland' and [dbo].[Inpatient_provdr].DRG_Definition = '192 - CHRONIC OBSTRUCTIVE PULMONARY DISEASE W/O CC/MCC'
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where [dbo].[Inpatient_provdr].Total_Discharges > 2000
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where ([dbo].[Inpatient_provdr].Average_Medicare_Payments < 2000 and [dbo].[Inpatient_Pat].Average_Medicare_Payments < 3000) and
+([dbo].[Inpatient_provdr].Total_Discharges < 30000)

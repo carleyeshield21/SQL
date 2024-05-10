@@ -111,7 +111,6 @@ select Region, Household_Head_Class_of_Worker, Type_of_Household
 from table_view
 where Type_of_Household = 'Single Family'
 
-use data_vase
 select * from [dbo].[Family Income and Expenditure]
 
 select * from [dbo].[Inpatient_Pat]
@@ -170,3 +169,22 @@ group by [dbo].[Inpatient_Pat].DRG_Definition
 SELECT *
 FROM [dbo].[Inpatient_Pat]
 INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
+SELECT *
+FROM [dbo].[Inpatient_provdr]
+
+SELECT [dbo].[Inpatient_provdr].DRG_Definition, COUNT(*)
+FROM [dbo].[Inpatient_provdr]
+INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where [dbo].[Inpatient_provdr].DRG_Definition = '207 - RESPIRATORY SYSTEM DIAGNOSIS W VENTILATOR SUPPORT 96+ HOURS'
+group by [dbo].[Inpatient_provdr].DRG_Definition
+
+SELECT [dbo].[Inpatient_provdr].Provider_City, COUNT(*)
+FROM [dbo].[Inpatient_provdr]
+INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+where ([dbo].[Inpatient_provdr].Provider_City = 'BOSTON' or [dbo].[Inpatient_provdr].Provider_City = 'NEW YORK')
+group by [dbo].[Inpatient_provdr].Provider_City
+
+use data_vase

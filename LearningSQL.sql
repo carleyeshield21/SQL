@@ -1,3 +1,12 @@
+--Hierarchy of Clauses
+--SELECT column1, column2, ...
+--FROM table1
+--JOIN table2 ON ...
+--WHERE condition
+--GROUP BY column
+--HAVING condition
+--ORDER BY column
+
 --use data_vase
 --create table person
 --(person_id smallint,
@@ -192,6 +201,13 @@ FROM [dbo].[Inpatient_provdr]
 INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
 group by [dbo].[Inpatient_provdr].Provider_City
 having COUNT(*) > 80000
+
+SELECT [dbo].[Inpatient_provdr].Provider_City, COUNT(*)
+FROM [dbo].[Inpatient_provdr]
+INNER JOIN [dbo].[Inpatient_Pat] ON [dbo].[Inpatient_provdr].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+group by [dbo].[Inpatient_provdr].Provider_City
+having COUNT(*) > 80000
+order by [dbo].[Inpatient_provdr].Provider_City
 
 SELECT [dbo].[Inpatient_provdr].Provider_City, COUNT(*)
 FROM [dbo].[Inpatient_provdr]

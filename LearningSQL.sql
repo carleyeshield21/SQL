@@ -239,4 +239,22 @@ select * from [dbo].[Outpatient_provdr]
 
 select [dbo].[Inpatient_provdr].Average_Total_Payments from [dbo].[Inpatient_provdr]
 select [dbo].[Outpatient_provdr].Average_Total_Payments from [dbo].[Outpatient_provdr]
-use data_vase
+
+--Using wildcards and regex
+
+--Provider_Name beginning with letters 'eu'
+select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider_State,[dbo].[Inpatient_provdr].Provider_City
+from [dbo].[Inpatient_provdr]
+where [dbo].[Inpatient_provdr].Provider_Name like 'eu%'
+
+--Provider_Name ending with letters 'x'
+select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider_State,[dbo].[Inpatient_provdr].Provider_City
+from [dbo].[Inpatient_provdr]
+where [dbo].[Inpatient_provdr].Provider_Name like '%x'
+
+--Provider_Name with letters 'by' in the middle of the string
+select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider_State,[dbo].[Inpatient_provdr].Provider_City
+from [dbo].[Inpatient_provdr]
+where [dbo].[Inpatient_provdr].Provider_Name like '%by%'
+
+use data_vase	

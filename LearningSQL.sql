@@ -223,8 +223,20 @@ ALTER COLUMN APC nvarchar(max);
 select *
 from [dbo].[Inpatient_provdr]
 inner join [dbo].[Outpatient_provdr] on [dbo].[Inpatient_provdr].Provider_Id = [dbo].[Outpatient_provdr].Provider_Id
-where [dbo].[Outpatient_provdr].APC = '0368 - Level II Pulmonary Tests'
+where [dbo].[Outpatient_provdr].APC = '0336 - Magnetic Resonance Imaging and Magnetic Resonance Angiography without Contrast'
+
+select [dbo].[Outpatient_provdr].APC, COUNT(*)
+from [dbo].[Inpatient_provdr]
+inner join [dbo].[Outpatient_provdr] on [dbo].[Inpatient_provdr].Provider_Id = [dbo].[Outpatient_provdr].Provider_Id
+where [dbo].[Outpatient_provdr].APC = '0336 - Magnetic Resonance Imaging and Magnetic Resonance Angiography without Contrast'
+group by [dbo].[Outpatient_provdr].APC
+
+select [dbo].[Inpatient_provdr].Average_Covered_Charges, [dbo].[Inpatient_provdr].Provider_City,[dbo].[Inpatient_provdr].Provider_State from [dbo].[Inpatient_provdr]
+order by [dbo].[Inpatient_provdr].Average_Covered_Charges
 
 select * from [dbo].[Inpatient_provdr]
 select * from [dbo].[Outpatient_provdr]
+
+select [dbo].[Inpatient_provdr].Average_Total_Payments from [dbo].[Inpatient_provdr]
+select [dbo].[Outpatient_provdr].Average_Total_Payments from [dbo].[Outpatient_provdr]
 use data_vase

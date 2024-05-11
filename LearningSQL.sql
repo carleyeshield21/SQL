@@ -216,4 +216,15 @@ where ([dbo].[Inpatient_provdr].Provider_City = 'BOSTON' or [dbo].[Inpatient_pro
 group by [dbo].[Inpatient_provdr].Provider_City
 having COUNT(*) > 70000
 
+--Altering column before comparing, must be of compatible data types
+ALTER TABLE [dbo].[Outpatient_provdr]
+ALTER COLUMN APC nvarchar(max);
+
+select *
+from [dbo].[Inpatient_provdr]
+inner join [dbo].[Outpatient_provdr] on [dbo].[Inpatient_provdr].Provider_Id = [dbo].[Outpatient_provdr].Provider_Id
+where [dbo].[Outpatient_provdr].APC = '0368 - Level II Pulmonary Tests'
+
+select * from [dbo].[Inpatient_provdr]
+select * from [dbo].[Outpatient_provdr]
 use data_vase

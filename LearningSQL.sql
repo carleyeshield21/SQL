@@ -257,4 +257,9 @@ select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider
 from [dbo].[Inpatient_provdr]
 where [dbo].[Inpatient_provdr].Provider_Name like '%by%'
 
+--Provider_City with four characters ending with the letter 'z'
+select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider_State,[dbo].[Inpatient_provdr].Provider_City
+from [dbo].[Inpatient_provdr]
+where [dbo].[Inpatient_provdr].Provider_City like '___z'
+
 use data_vase	

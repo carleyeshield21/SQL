@@ -299,4 +299,19 @@ select [dbo].[Inpatient_provdr].Provider_Name, COUNT(*) as cunt from [dbo].[Inpa
 group by [dbo].[Inpatient_provdr].Provider_Name
 order by [dbo].[Inpatient_provdr].Provider_Name
 
+select [dbo].[Inpatient_provdr].Average_Total_Payments from [dbo].[Inpatient_provdr]
+
+select max([dbo].[Inpatient_provdr].Average_Total_Payments) from [dbo].[Inpatient_provdr]
+select min([dbo].[Inpatient_provdr].Average_Total_Payments) from [dbo].[Inpatient_provdr]
+select avg([dbo].[Inpatient_provdr].Average_Total_Payments) from [dbo].[Inpatient_provdr]
+select count([dbo].[Inpatient_provdr].Average_Total_Payments) from [dbo].[Inpatient_provdr]
+
+select count([dbo].[Inpatient_provdr].Average_Total_Payments),
+count(distinct [dbo].[Inpatient_provdr].Average_Total_Payments)
+from [dbo].[Inpatient_provdr]
+
+select [dbo].[Inpatient_provdr].Provider_Name, COUNT(*) as prubayder_neym
+from [dbo].[Inpatient_provdr]
+group by rollup([dbo].[Inpatient_provdr].Provider_Name)
+
 use data_vase

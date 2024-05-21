@@ -314,4 +314,9 @@ select [dbo].[Inpatient_provdr].Provider_Name, COUNT(*) as prubayder_neym
 from [dbo].[Inpatient_provdr]
 group by rollup([dbo].[Inpatient_provdr].Provider_Name)
 
+select [dbo].[Inpatient_provdr].Provider_Name, COUNT(*) as prubayder_neym
+from [dbo].[Inpatient_provdr]
+group by rollup([dbo].[Inpatient_provdr].Provider_Name)
+having COUNT(*) > 50
+
 use data_vase

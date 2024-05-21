@@ -181,6 +181,10 @@ INNER JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [d
 
 SELECT *
 FROM [dbo].[Inpatient_Pat]
+right JOIN [dbo].[Inpatient_provdr] ON [dbo].[Inpatient_Pat].DRG_Definition = [dbo].[Inpatient_provdr].DRG_Definition
+
+SELECT *
+FROM [dbo].[Inpatient_Pat]
 SELECT *
 FROM [dbo].[Inpatient_provdr]
 
@@ -262,4 +266,37 @@ select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider
 from [dbo].[Inpatient_provdr]
 where [dbo].[Inpatient_provdr].Provider_City like '___z'
 
-use data_vase	
+select [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Provider_State,[dbo].[Inpatient_provdr].Provider_City
+from [dbo].[Inpatient_provdr]
+where [dbo].[Inpatient_provdr].Provider_City is null
+
+select [dbo].[Inpatient_Pat].DRG_Definition from [dbo].[Inpatient_Pat]
+select [dbo].[Outpatient_Pat].APC from [dbo].[Outpatient_Pat]
+
+select [dbo].[Inpatient_Pat].DRG_Definition from [dbo].[Inpatient_Pat]
+except
+select [dbo].[Outpatient_Pat].APC from [dbo].[Outpatient_Pat]
+
+SELECT CONCAT('danke sch', CHAR(148), 'n');
+SELECT STUFF('hello world', 1, 5, 'goodbye cruel')
+select (1+2)
+SELECT GETDATE()
+
+select [dbo].[Outpatient_Pat].APC,  count(*) as kawnt from [dbo].[Outpatient_Pat]
+group by [dbo].[Outpatient_Pat].APC
+
+select max([dbo].[Outpatient_Pat].APC) from [dbo].[Outpatient_Pat]
+
+select [dbo].[Inpatient_provdr].Provider_Name from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].Provider_Name
+order by [dbo].[Inpatient_provdr].Provider_Name
+
+select [dbo].[Inpatient_provdr].Provider_Name from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].Provider_Name
+order by [dbo].[Inpatient_provdr].Provider_Name
+
+select [dbo].[Inpatient_provdr].Provider_Name, COUNT(*) as cunt from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].Provider_Name
+order by [dbo].[Inpatient_provdr].Provider_Name
+
+use data_vase

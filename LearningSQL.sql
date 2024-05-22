@@ -319,4 +319,9 @@ from [dbo].[Inpatient_provdr]
 group by rollup([dbo].[Inpatient_provdr].Provider_Name)
 having COUNT(*) > 50
 
+select [dbo].[Inpatient_provdr].DRG_Definition, [dbo].[Inpatient_provdr].Provider_State, COUNT(*) as state_count
+from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].DRG_Definition,[dbo].[Inpatient_provdr].Provider_State
+order by [dbo].[Inpatient_provdr].DRG_Definition
+
 use data_vase

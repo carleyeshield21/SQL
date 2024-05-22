@@ -324,4 +324,22 @@ from [dbo].[Inpatient_provdr]
 group by [dbo].[Inpatient_provdr].DRG_Definition,[dbo].[Inpatient_provdr].Provider_State
 order by [dbo].[Inpatient_provdr].DRG_Definition
 
+select [dbo].[Inpatient_provdr].DRG_Definition, [dbo].[Inpatient_provdr].Provider_State, COUNT(*) as state_count
+from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].DRG_Definition,[dbo].[Inpatient_provdr].Provider_State
+having COUNT(*) >= 50
+order by [dbo].[Inpatient_provdr].DRG_Definition
+
+select [dbo].[Inpatient_provdr].DRG_Definition, [dbo].[Inpatient_provdr].Provider_State, COUNT(*) as state_count
+from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].DRG_Definition,[dbo].[Inpatient_provdr].Provider_State
+having COUNT(*) >= 50
+order by state_count
+
+select [dbo].[Inpatient_provdr].DRG_Definition, [dbo].[Inpatient_provdr].Provider_State, COUNT(*) as state_count
+from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].DRG_Definition,[dbo].[Inpatient_provdr].Provider_State
+having COUNT(*) >= 100
+order by state_count desc
+
 use data_vase

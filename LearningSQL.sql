@@ -342,4 +342,11 @@ group by [dbo].[Inpatient_provdr].DRG_Definition,[dbo].[Inpatient_provdr].Provid
 having COUNT(*) >= 100
 order by state_count desc
 
+select [dbo].[Inpatient_provdr].DRG_Definition, [dbo].[Inpatient_provdr].Provider_Name, [dbo].[Inpatient_provdr].Total_Discharges
+from [dbo].[Inpatient_provdr]
+where [dbo].[Inpatient_provdr].Total_Discharges = (select MAX([dbo].[Inpatient_provdr].Total_Discharges) from [dbo].[Inpatient_provdr])
+
+select [dbo].[Inpatient_provdr].Total_Discharges from [dbo].[Inpatient_provdr]
+order by [dbo].[Inpatient_provdr].Total_Discharges desc
+
 use data_vase

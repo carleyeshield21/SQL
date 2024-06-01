@@ -349,4 +349,26 @@ where [dbo].[Inpatient_provdr].Total_Discharges = (select MAX([dbo].[Inpatient_p
 select [dbo].[Inpatient_provdr].Total_Discharges from [dbo].[Inpatient_provdr]
 order by [dbo].[Inpatient_provdr].Total_Discharges desc
 
+select * from [dbo].[Review_patient_history_samp]
+
+--Creating a query without the from clause
+ SELECT 'Small Fry' name, 0 low_limit, 74.99 high_limit
+ UNION ALL
+ SELECT 'Average Joes' name, 75 low_limit, 149.99 high_limit
+ UNION ALL
+ SELECT 'Heavy Hitters' name, 150 low_limit, 9999999.99 high_limit;
+
+select [dbo].[Inpatient_provdr].Provider_City, [dbo].[Inpatient_provdr].Provider_Name, count([dbo].[Inpatient_provdr].Provider_City) as num from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].Provider_City, [dbo].[Inpatient_provdr].Provider_Name
+order by num desc
+
+select [dbo].[Inpatient_provdr].Provider_City, [dbo].[Inpatient_provdr].Provider_Name, count(*) as num from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].Provider_City, [dbo].[Inpatient_provdr].Provider_Name
+order by num desc
+
+select * from [dbo].[Outpatient_Pat]
+
+select GETDATE()
+select DATEDIFF(DAY,GETDATE(),'2010-05-10')
+
 use data_vase

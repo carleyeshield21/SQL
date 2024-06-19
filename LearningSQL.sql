@@ -366,9 +366,32 @@ select [dbo].[Inpatient_provdr].Provider_City, [dbo].[Inpatient_provdr].Provider
 group by [dbo].[Inpatient_provdr].Provider_City, [dbo].[Inpatient_provdr].Provider_Name
 order by num desc
 
-select * from [dbo].[Outpatient_Pat]
+select [dbo].[Inpatient_provdr].Provider_Name, COUNT(*) from [dbo].[Inpatient_provdr]
+group by [dbo].[Inpatient_provdr].Provider_Name
+having COUNT(*) > 1 and COUNT(*) < 6
+
+select [dbo].[Outpatient_Pat].Average_Estimated_Submitted_Charges, count(*) s from [dbo].[Outpatient_Pat]
+group by [dbo].[Outpatient_Pat].Average_Estimated_Submitted_Charges
+having COUNT(*) > 1
 
 select GETDATE()
 select DATEDIFF(DAY,GETDATE(),'2010-05-10')
+
+select * from [dbo].[IsportTims]
+
+CREATE NONCLUSTERED INDEX IDX_LastName
+ON [dbo].[IsportTims] (attack);
+EXEC sp_helpindex '[dbo].[IsportTims]'
+DROP INDEX [dbo].[IsportTims].IDX_LastName;
+
+CREATE NONCLUSTERED INDEX hindex
+ON [dbo].[Outpatient_Pat] (APC);
+EXEC sp_helpindex '[dbo].[Outpatient_Pat]'
+DROP INDEX [dbo].[IsportTims].hindex;
+
+select(SUBSTRING('email',5,3))
+
+SELECT TABLE_NAME AS ViewName
+FROM INFORMATION_SCHEMA.VIEWS;
 
 use data_vase

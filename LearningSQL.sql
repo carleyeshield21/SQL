@@ -374,8 +374,14 @@ select [dbo].[Outpatient_Pat].Average_Estimated_Submitted_Charges, count(*) s fr
 group by [dbo].[Outpatient_Pat].Average_Estimated_Submitted_Charges
 having COUNT(*) > 1
 
+select * from [dbo].[Inpatient_provdr]
+select distinct [dbo].[Inpatient_provdr].DRG_Definition from [dbo].[Inpatient_provdr]
+order by 1
+
+select CURRENT_TIMESTAMP
 select GETDATE()
-select DATEDIFF(DAY,GETDATE(),'2010-05-10')
+select DATEDIFF(DAY,'1978-07-11',GETDATE())
+select DAY('1978-07-11')
 
 select * from [dbo].[IsportTims]
 
@@ -393,5 +399,25 @@ select(SUBSTRING('email',5,3))
 
 SELECT TABLE_NAME AS ViewName
 FROM INFORMATION_SCHEMA.VIEWS;
+
+select * from [dbo].[us_retail_sales]
+select [dbo].[us_retail_sales].kind_of_business, COUNT(*) bus from [dbo].[us_retail_sales]
+group by [dbo].[us_retail_sales].kind_of_business
+
+SELECT sales_month
+,sales
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Automotive parts, acc., and tire stores'
+
+select [dbo].[us_retail_sales].sales_month from [dbo].[us_retail_sales]
+select DATEPART(YEAR,[dbo].[us_retail_sales].sales_month) from [dbo].[us_retail_sales]
+
+SELECT DATEPART(YEAR,sales_month) as sales_year 
+,sum(sales) as sales
+FROM [dbo].[us_retail_sales]group by sales_monthorder by sales desc
+select * from [dbo].[us_retail_sales]
+
+SELECT DATEPART(YEAR,sales_month) as sales_year 
+FROM [dbo].[us_retail_sales]
 
 use data_vase

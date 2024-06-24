@@ -475,12 +475,29 @@ from [dbo].[us_retail_sales]
 WHERE kind_of_business = 'Retail and food services sales, total' and DATEPART(YEAR,sales_month)=1992
 GROUP BY sales_month) new_column
 
-select sales_year
+select sum_sales
 from (
 SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
 from [dbo].[us_retail_sales]
 WHERE kind_of_business = 'Retail and food services sales, total' and DATEPART(YEAR,sales_month)=1992
 GROUP BY sales_month) new_column
+
+select sales_year,SUM(sum_sales) as total_sales_1992
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Retail and food services sales, total' and DATEPART(YEAR,sales_month)=1992
+GROUP BY sales_month) new_column
+group by sales_year
+
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+group by sales_month
+order by sales_year
+
+SELECT DATEPART(YEAR,sales_month)
+from [dbo].[us_retail_sales]
+where DATEPART(YEAR,sales_month) = 1992
 
 select * from [dbo].[us_retail_sales]
 

@@ -414,10 +414,84 @@ select DATEPART(YEAR,[dbo].[us_retail_sales].sales_month) from [dbo].[us_retail_
 
 SELECT DATEPART(YEAR,sales_month) as sales_year 
 ,sum(sales) as sales
-FROM [dbo].[us_retail_sales]group by sales_monthorder by sales desc
+FROM [dbo].[us_retail_sales]
+group by sales_month
+order by sales_year
+
+SELECT DATEPART(YEAR,sales_month), COUNT(*) as sales_year
+FROM [dbo].[us_retail_sales]
+group by sales_month
+
+select sales_month as sales_month, sales as sales
+from [dbo].[us_retail_sales]
+order by 2
+
+select DATEPART(YEAR, sales_month) as sales_year, sales as sales
+from [dbo].[us_retail_sales]
+order by 1
+
+select DATEPART(YEAR, sales_month) as sales_year, SUM(sales) as sales
+from [dbo].[us_retail_sales]
+group by sales_month
+order by 1
+
+select sales_month as sales_date, COUNT(*) as sales_year_count
+from [dbo].[us_retail_sales]
+group by sales_month
+order by 1
+
+select sales as sales, sales_month, COUNT(*) as sales_count
+from [dbo].[us_retail_sales]
+group by sales, sales_month
+order by sales_month
+
+select DATEPART(YEAR, sales_month) as year, COUNT(*) as year_count
+from [dbo].[us_retail_sales]
+group by sales_month
+order by year
+
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Retail and food services sales, total'
+GROUP BY sales_month
+
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Retail and food services sales, total' and DATEPART(YEAR,sales_month)=1992
+GROUP BY sales_month
+
+--using sub query
+select sales_year
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Retail and food services sales, total'
+GROUP BY sales_month) new_column
+
+select sales_year
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Retail and food services sales, total' and DATEPART(YEAR,sales_month)=1992
+GROUP BY sales_month) new_column
+
+select sales_year
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, SUM(sales) as sum_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Retail and food services sales, total' and DATEPART(YEAR,sales_month)=1992
+GROUP BY sales_month) new_column
+
 select * from [dbo].[us_retail_sales]
 
-SELECT DATEPART(YEAR,sales_month) as sales_year 
-FROM [dbo].[us_retail_sales]
+SELECT 
+    sales_month, 
+    sales,
+    COUNT(*) AS SaleCount
+FROM 
+    [dbo].[us_retail_sales]
+GROUP BY 
+    sales_month, 
+    sales;
 
 use data_vase

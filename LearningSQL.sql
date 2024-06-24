@@ -499,6 +499,12 @@ SELECT DATEPART(YEAR,sales_month)
 from [dbo].[us_retail_sales]
 where DATEPART(YEAR,sales_month) = 1992
 
+SELECT DATEPART(YEAR,sales_month) as sales_year
+,kind_of_business
+,salesfrom [dbo].[us_retail_sales]--getting the total sales for each yearSELECT DATEPART(YEAR,sales_month) year, sum(sales) as total_salesfrom [dbo].[us_retail_sales]group by DATEPART(YEAR,sales_month)order by DATEPART(YEAR,sales_month)
+SELECT DATEPART(YEAR,sales_month) year, sales as salesfrom [dbo].[us_retail_sales]
+where DATEPART(YEAR,sales_month)=1992
+
 select * from [dbo].[us_retail_sales]
 
 SELECT 

@@ -631,7 +631,16 @@ group by sales_month
  end) as mens_sales
 from [dbo].[us_retail_sales]
 WHERE kind_of_business in ('Women''s clothing stores','Men''s clothing stores')
-group by sales_month) as dwhere sales_year = 1992select * from [dbo].[us_retail_sales]where kind_of_business in ('Women''s clothing stores','Men''s clothing stores')SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales
+group by sales_month) as dwhere sales_year = 1992--querying about the total sales of women's clothes in 1992select sales_year, SUM(womens_sales) from(SELECT DATEPART(YEAR,sales_month) as sales_year
+,sum(case when kind_of_business = 'Women''s clothing stores' 
+ then sales 
+ end) as womens_sales
+,sum(case when kind_of_business = 'Men''s clothing stores'
+ then sales 
+ end) as mens_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business in ('Women''s clothing stores','Men''s clothing stores')
+group by sales_month) as dwhere sales_year = 1992group by sales_yearselect * from [dbo].[us_retail_sales]where kind_of_business in ('Women''s clothing stores','Men''s clothing stores')SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales
 from [dbo].[us_retail_sales]
 WHERE kind_of_business in ('Women''s clothing stores','Men''s clothing stores')
 

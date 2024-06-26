@@ -515,21 +515,117 @@ from [dbo].[us_retail_sales]
 where DATEPART(YEAR,sales_month)=1992
 
 SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
-FROM [dbo].[us_retail_sales]where kind_of_business = 'Men''s clothing stores'--getting the year with the salesselect sales_year,salesfrom (SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
-FROM [dbo].[us_retail_sales]where kind_of_business = 'Men''s clothing stores') as resultwhere sales_year = 1992--getting the year with the sales, and getting the totalselect sales_year,sum(sales)from (SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
-FROM [dbo].[us_retail_sales]where kind_of_business = 'Men''s clothing stores') as resultwhere sales_year = 1992group by sales_year--getting the total sales per yearselect sales_year,sum(sales) as sales_per_yearfrom (SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
-FROM [dbo].[us_retail_sales]where kind_of_business = 'Men''s clothing stores') as resultgroup by sales_yearSELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
-FROM [dbo].[us_retail_sales]where kind_of_business = 'Women''s clothing stores'
-select * from [dbo].[us_retail_sales]
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Men''s clothing stores'
 
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Women''s clothing stores'
+
+--getting the year with the sales
+select sales_year,sales
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Men''s clothing stores') as result
+where sales_year = 1992
+
+--getting the year with the sales, and getting the total
+select sales_year,sum(sales) as sales_in_year_for_mens_clothing
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Men''s clothing stores') as result
+where sales_year = 1992
+group by sales_year
+
+select sales_year,sum(sales) as sales_in_year_for_mens_clothing
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Men''s clothing stores') as result
+--where sales_year = 1992
+group by sales_year
+
+--getting the total sales per year
+select sales_year,sum(sales) as sales_per_year
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Men''s clothing stores') as result
+group by sales_year
+
+select sales_year,sum(sales) as sales_per_year
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Men''s clothing stores') as result
+group by sales_year
+
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Women''s clothing stores'
+
+select sales_year,sum(sales) as sales_in_year_for_womens_clothing
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business = 'Women''s clothing stores') as result
+where sales_year = 1992
+group by sales_year
+
+select sales_year,sum(sales) as sales_in_year_for_womens_clothing
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business in ('Women''s clothing stores','Men''s clothing stores')) as result
+--where sales_year = 1992
+group by sales_year
+
+select sales_year,sum(sales) as sales_in_year_for_womens_clothing
+from (
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales, kind_of_business as kind_of_business
+FROM [dbo].[us_retail_sales]
+where kind_of_business in ('Men''s clothing stores')) as result
+--where sales_year = 1992
+group by sales_year
+
+SELECT DATEPART(YEAR,sales_month) as sales_year
+,sum(case when kind_of_business = 'Women''s clothing stores' 
+ then sales 
+ end)
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business in ('Women''s clothing stores')
+GROUP BY 1
 SELECT 
-    sales_month, 
-    sales,
-    COUNT(*) AS SaleCount
-FROM 
-    [dbo].[us_retail_sales]
-GROUP BY 
-    sales_month, 
-    sales;
+    DATEPART(YEAR,sales_month) as sales_year,
+    kind_of_business
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business IN ('Men''s clothing stores', 'Women''s clothing stores');
+
+SELECT DATEPART(YEAR,sales_month) as sales_year
+,sum(case when kind_of_business = 'Women''s clothing stores' 
+ then sales 
+ end) as womens_sales
+,sum(case when kind_of_business = 'Men''s clothing stores' 
+ then sales 
+ end) as mens_sales
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business in ('Men''s clothing stores','Women''s clothing stores')
+group by kind_of_business--querying of sales year for men's and women's clothing saleSELECT DATEPART(YEAR,sales_month) as sales_year
+,sum(case when kind_of_business = 'Women''s clothing stores' 
+ then sales 
+ end) as womens_sales
+,sum(case when kind_of_business = 'Men''s clothing stores'
+ then sales 
+ end) as mens_sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business in ('Women''s clothing stores','Men''s clothing stores')
+group by sales_month
+SELECT DATEPART(YEAR,sales_month) as sales_year, sales as sales
+from [dbo].[us_retail_sales]
+WHERE kind_of_business in ('Women''s clothing stores','Men''s clothing stores')
+
+select * from [dbo].[us_retail_sales]
 
 use data_vase

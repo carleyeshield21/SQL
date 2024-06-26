@@ -13,7 +13,7 @@
 --values(23,'Wolf FC',2,3)
 
 --To display a column name to a different name
---select teamid as id,teamname as name from SportTeams; 
+--select teamid as id,teamname as name from SportTeams;
 
 --*Deleting contents from columns
 --select * from SportTeams
@@ -254,5 +254,27 @@ use data_vase
 --*Using the function distinct
 select distinct (Department)
 from [dbo].[70-461datau]
+
+CREATE TABLE Engployee (
+    EmployeeID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    HireDate DATE,
+    Salary DECIMAL(10, 2)
+);
+
+INSERT INTO Engployee (EmployeeID, FirstName, LastName, HireDate, Salary)
+VALUES
+(1, 'John', 'Doe', '2010-05-10', 60000),
+(2, 'Jane', 'Smith', '2015-07-20', 70000),
+(3, 'Alice', 'Johnson', '2020-01-15', 75000),
+(4, 'Bob', 'Brown', '2018-04-10', 50000);
+
+select * from Engployee
+
+CREATE NONCLUSTERED INDEX IDX_LastName
+ON Engployee (LastName);
+
+EXEC sp_helpindex 'Engployee';
 
 SELECT GETDATE()

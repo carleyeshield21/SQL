@@ -750,7 +750,14 @@ WHERE kind_of_business in ('Women''s clothing stores','Men''s clothing stores')
 group by sales_month) as d
 group by sales_year) as dd
 
-select (31815*1.0)/10179
+select *
+from [dbo].[Inpatient_provdr]
+inner join [dbo].[Outpatient_provdr] on [dbo].[Inpatient_provdr].Provider_Id = [dbo].[Outpatient_provdr].Provider_Id
+where [dbo].[Outpatient_provdr].APC = '0336 - Magnetic Resonance Imaging and Magnetic Resonance Angiography without Contrast'
+
+--sample of self join
+select * from [dbo].[us_retail_sales] as table1
+inner join [dbo].[us_retail_sales] as table2 on table1.sales_month = table2.sales_month
 
 select * from [dbo].[us_retail_sales]
 

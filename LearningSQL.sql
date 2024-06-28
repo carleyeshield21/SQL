@@ -757,7 +757,10 @@ where [dbo].[Outpatient_provdr].APC = '0336 - Magnetic Resonance Imaging and Mag
 
 --sample of self join
 select * from [dbo].[us_retail_sales] as table1
-inner join [dbo].[us_retail_sales] as table2 on table1.sales_month = table2.sales_month
+inner join [dbo].[us_retail_sales] as table2 on table1.sales = table2.sales
+
+select table1.sales_month, table1.naics_code, table1.kind_of_business from [dbo].[us_retail_sales] as table1
+inner join [dbo].[us_retail_sales] as table2 on table1.naics_code = table2.naics_code
 
 select * from [dbo].[us_retail_sales]
 

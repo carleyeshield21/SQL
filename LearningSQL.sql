@@ -759,9 +759,24 @@ where [dbo].[Outpatient_provdr].APC = '0336 - Magnetic Resonance Imaging and Mag
 select * from [dbo].[us_retail_sales] as table1
 inner join [dbo].[us_retail_sales] as table2 on table1.sales = table2.sales
 
+select table1.sales_month, table1.kind_of_business from [dbo].[us_retail_sales] as table1
+inner join [dbo].[us_retail_sales] as table2 on table1.sales_month = table2.sales_month
+
+select table1.sales_month, table1.kind_of_business from [dbo].[us_retail_sales] as table1
+left join [dbo].[us_retail_sales] as table2 on table1.sales_month = table2.sales_month
+
 select table1.sales_month, table1.naics_code, table1.kind_of_business from [dbo].[us_retail_sales] as table1
 inner join [dbo].[us_retail_sales] as table2 on table1.naics_code = table2.naics_code
 
-select * from [dbo].[us_retail_sales]
+SELECT sales_month, kind_of_business, COUNT(kind_of_business) OVER (PARTITION BY naics_code) AS count_business
+FROM [dbo].[us_retail_sales];
+
+--count query
+select kind_of_business, COUNT(*) as business_count
+from [dbo].[us_retail_sales]
+where kind_of_business in ('Men''s clothing stores','Women''s clothing stores')
+group by kind_of_business
+order by kind_of_business
 
 use data_vase
+select * from [dbo].[us_retail_sales]

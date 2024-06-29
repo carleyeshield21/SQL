@@ -759,6 +759,7 @@ where [dbo].[Outpatient_provdr].APC = '0336 - Magnetic Resonance Imaging and Mag
 select * from [dbo].[us_retail_sales] as table1
 inner join [dbo].[us_retail_sales] as table2 on table1.sales = table2.sales
 
+--self joins should include the alias name of the table
 select table1.sales_month, table1.kind_of_business from [dbo].[us_retail_sales] as table1
 inner join [dbo].[us_retail_sales] as table2 on table1.sales_month = table2.sales_month
 
@@ -771,12 +772,29 @@ inner join [dbo].[us_retail_sales] as table2 on table1.naics_code = table2.naics
 SELECT sales_month, kind_of_business, COUNT(kind_of_business) OVER (PARTITION BY naics_code) AS count_business
 FROM [dbo].[us_retail_sales];
 
+SELECT sales_month, kind_of_business, COUNT(naics_code) OVER (PARTITION BY sales) AS count_business
+FROM [dbo].[us_retail_sales];
+
+--first value
+SELECT sales_month, first_value(sales_month) OVER (ORDER BY sales) AS count_business
+FROM [dbo].[us_retail_sales];
+
+--giving a row number to every column
+SELECT sales_month, ROW_NUMBER() OVER (ORDER BY sales) AS count_business
+FROM [dbo].[us_retail_sales];
+
+select naics_code, COUNT(*) as naics_code_count
+from [dbo].[us_retail_sales]
+group by naics_code
+having COUNT(*) > 348
+
 --count query
 select kind_of_business, COUNT(*) as business_count
 from [dbo].[us_retail_sales]
 where kind_of_business in ('Men''s clothing stores','Women''s clothing stores')
 group by kind_of_business
 order by kind_of_business
+
 
 use data_vase
 select * from [dbo].[us_retail_sales]

@@ -795,6 +795,11 @@ where kind_of_business in ('Men''s clothing stores','Women''s clothing stores')
 group by kind_of_business
 order by kind_of_business
 
+--simple query using over clause
+SELECT
+sales_month,naics_code,
+ROW_NUMBER() OVER (PARTITION BY sales_month order by sales_month) AS RowNum
+FROM [dbo].[us_retail_sales]
 
 use data_vase
 select * from [dbo].[us_retail_sales]

@@ -801,5 +801,59 @@ sales_month,naics_code,
 ROW_NUMBER() OVER (PARTITION BY sales_month order by sales_month) AS RowNum
 FROM [dbo].[us_retail_sales]
 
+--simple query using over clause
+SELECT
+sales_month,naics_code,
+ROW_NUMBER() OVER (order by sales_month) AS RowNum
+FROM [dbo].[us_retail_sales]
+
+--simple query using over clause
+SELECT
+sales_month,naics_code,sales,
+ROW_NUMBER() OVER (order by sales) AS RowNum
+FROM [dbo].[us_retail_sales]
+
+SELECT sales_month
+,avg(sales) over (order by sales_month 
+ rows between 11 preceding and current row
+ ) as moving_avg
+ FROM [dbo].[us_retail_sales]
+
+select kind_of_business, SUM(sales) over (order by sales_month)
+from [dbo].[us_retail_sales]
+
+select DATEPART(YEAR, sales_month) as sales_year, SUM(sales) as sales
+from [dbo].[us_retail_sales]
+group by sales_month
+order by 1
+
+--getting the total sales for each year
+SELECT DATEPART(YEAR,sales_month) year, sum(sales) as total_sales
+from [dbo].[us_retail_sales]
+group by DATEPART(YEAR,sales_month)
+order by DATEPART(YEAR,sales_month)
+
+select years,sales
+from(
+select DATEPART(YEAR,sales_month) as years,sales as sales
+from [dbo].[us_retail_sales]) as newtable
+where years = 1992
+
+select years,SUM(sales)
+from(
+select DATEPART(YEAR,sales_month) as years,sales as sales
+from [dbo].[us_retail_sales]) as newtable
+where years = 1992
+group by years
+
+select years,
+case when years = 1992 then sales
+else 0
+end
+from(
+select DATEPART(YEAR,sales_month) as years,sales as sales
+from [dbo].[us_retail_sales]) as newtable
+
+
 use data_vase
 select * from [dbo].[us_retail_sales]

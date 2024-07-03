@@ -863,5 +863,16 @@ FROM [dbo].[us_retail_sales]
 WHERE kind_of_business = 'Women''s clothing stores'--query using over and partition by clauseSELECT naics_code, kind_of_business, COUNT(sales_month) OVER (PARTITION BY naics_code) AS column1
 FROM [dbo].[us_retail_sales];
 
+--difference between using over and partition by clause against count clause
+SELECT sales, COUNT(sales) OVER (PARTITION BY sales) AS column1
+FROM [dbo].[us_retail_sales]
+order by sales
+
+--difference between using over and partition by clause against count clause
+select sales, COUNT(*) as count
+from [dbo].[us_retail_sales]
+group by sales
+order by sales
+
 use data_vase
 select * from [dbo].[us_retail_sales]

@@ -854,6 +854,12 @@ from(
 select DATEPART(YEAR,sales_month) as years,sales as sales
 from [dbo].[us_retail_sales]) as newtable
 
-
+--YTD query sample
+SELECT sales_month, sales
+,sum(sales) over (partition by DATEPART(YEAR,sales_month) 
+ order by sales_month
+ ) as sales_ytd
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Women''s clothing stores'
 use data_vase
 select * from [dbo].[us_retail_sales]

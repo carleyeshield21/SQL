@@ -854,7 +854,7 @@ from(
 select DATEPART(YEAR,sales_month) as years,sales as sales
 from [dbo].[us_retail_sales]) as newtable
 
---YTD query sample
+--running YTD query sample
 SELECT sales_month, sales
 ,sum(sales) over (partition by DATEPART(YEAR,sales_month) 
  order by sales_month

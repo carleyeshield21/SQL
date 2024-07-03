@@ -856,10 +856,12 @@ from [dbo].[us_retail_sales]) as newtable
 
 --running YTD query sample
 SELECT sales_month, sales
-,sum(sales) over (partition by DATEPART(YEAR,sales_month) 
+,sum(sales) over (partition by DATEPART(YEAR,sales_month)
  order by sales_month
  ) as sales_ytd
 FROM [dbo].[us_retail_sales]
-WHERE kind_of_business = 'Women''s clothing stores'
+WHERE kind_of_business = 'Women''s clothing stores'--query using over and partition by clauseSELECT naics_code, kind_of_business, COUNT(sales_month) OVER (PARTITION BY naics_code) AS column1
+FROM [dbo].[us_retail_sales];
+
 use data_vase
 select * from [dbo].[us_retail_sales]

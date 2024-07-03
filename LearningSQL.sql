@@ -869,7 +869,7 @@ FROM [dbo].[us_retail_sales]
 order by sales
 
 --difference between using over and partition by clause against count clause
-select sales, COUNT(*) as count
+select sales, COUNT(*) as column1
 from [dbo].[us_retail_sales]
 group by sales
 order by sales

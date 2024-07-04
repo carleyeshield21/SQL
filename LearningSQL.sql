@@ -860,7 +860,10 @@ SELECT sales_month, sales
  order by sales_month
  ) as sales_ytd
 FROM [dbo].[us_retail_sales]
-WHERE kind_of_business = 'Women''s clothing stores'--query using over and partition by clauseSELECT naics_code, kind_of_business, COUNT(sales_month) OVER (PARTITION BY naics_code) AS column1
+WHERE kind_of_business = 'Women''s clothing stores'
+
+--query using over and partition by clause
+SELECT naics_code, kind_of_business, COUNT(sales_month) OVER (PARTITION BY naics_code) AS column1
 FROM [dbo].[us_retail_sales];
 
 --difference between using over and partition by clause against count clause
@@ -873,6 +876,10 @@ select sales, COUNT(*) as column1
 from [dbo].[us_retail_sales]
 group by sales
 order by sales
+
+--sample lag clause
+select kind_of_business, LAG(kind_of_business) over (order by sales) as previous_kind_of_business
+from [dbo].[us_retail_sales]
 
 use data_vase
 select * from [dbo].[us_retail_sales]

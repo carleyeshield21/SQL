@@ -881,5 +881,10 @@ order by sales
 select kind_of_business, LAG(kind_of_business) over (order by sales) as previous_kind_of_business
 from [dbo].[us_retail_sales]
 
+--sample lag clause
+select kind_of_business,sales_month, sales, DATEPART(MONTH, sales_month) as month, LAG(sales) over (order by DATEPART(MONTH, sales_month)) as seyls
+from [dbo].[us_retail_sales]
+where kind_of_business = 'Food and beverage stores'
+
 use data_vase
 select * from [dbo].[us_retail_sales]

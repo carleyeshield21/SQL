@@ -884,7 +884,25 @@ from [dbo].[us_retail_sales]
 --sample lag clause
 select kind_of_business,sales_month, sales, DATEPART(MONTH, sales_month) as month, LAG(sales) over (order by DATEPART(MONTH, sales_month)) as seyls
 from [dbo].[us_retail_sales]
-where kind_of_business = 'Food and beverage stores'
+where kind_of_business = 'Health and personal care stores'
+
+select sales_month, sales, LAG(sales) over (partition by DATEPART(MONTH, sales_month) order by DATEPART(MONTH, sales_month)) as prev
+from [dbo].[us_retail_sales]
+where kind_of_business = 'Health and personal care stores'
+
+SELECT sales_month, sales
+,lag(sales_month) over (partition by DATEPART(MONTH,sales_month) 
+ order by sales_month
+ ) as prev_year_month
+,lag(sales) over (partition by DATEPART(MONTH,sales_month) 
+ order by sales_month
+ ) as prev_year_sales
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Health and personal care stores'
+--query about sales comparison lag 12 months prior, for a particular kind of business
+SELECT sales_month, kind_of_business, sales, LAG(sales, 12) OVER (ORDER BY sales_month) AS SaleAmountTwelveRowsAgo
+from [dbo].[us_retail_sales]
+where kind_of_business = 'Health and personal care stores'
 
 use data_vase
 select * from [dbo].[us_retail_sales]

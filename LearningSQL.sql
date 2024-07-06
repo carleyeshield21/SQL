@@ -898,14 +898,30 @@ SELECT sales_month, sales
  order by sales_month
  ) as prev_year_sales
 FROM [dbo].[us_retail_sales]
-WHERE kind_of_business = 'Health and personal care stores'
+WHERE kind_of_business = 'Health and personal care stores'
+
 --query about sales comparison lag 12 months prior, for a particular kind of business
 SELECT sales_month, kind_of_business, sales, LAG(sales, 12) OVER (ORDER BY sales_month) AS SaleAmountTwelveRowsAgo
 from [dbo].[us_retail_sales]
-where kind_of_business = 'Health and personal care stores'
---date conversion
-SELECT sales_month, FORMAT(sales_month, 'dd') AS MonthName
+where kind_of_business = 'Health and personal care stores'
+
+--query about sales comparison lag 12 months prior, for a particular kind of business with computational difference
+SELECT sales_month, kind_of_business, sales, LAG(sales, 12) OVER (ORDER BY sales_month) AS SaleAmountTwelveRowsAgo, LAG(sales, 12) OVER (ORDER BY sales_month) - sales as sales_diff
 from [dbo].[us_retail_sales]
+where kind_of_business = 'Health and personal care stores'
+
+--date conversion
+SELECT sales_month, FORMAT(sales_month, 'Y') AS MonthName
+from [dbo].[us_retail_sales]
+
+--date conversion
+SELECT sales_month, FORMAT(sales_month, 'D') AS MonthName
+from [dbo].[us_retail_sales]
+
+SELECT sales_month
+,DATEPART(DAY,sales_month)
+FROM [dbo].[us_retail_sales]
+WHERE kind_of_business = 'Book stores'
 
 use data_vase
 select * from [dbo].[us_retail_sales]

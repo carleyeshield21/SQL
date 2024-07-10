@@ -921,7 +921,9 @@ from [dbo].[us_retail_sales]
 SELECT sales_month
 ,DATEPART(DAY,sales_month)
 FROM [dbo].[us_retail_sales]
-WHERE kind_of_business = 'Book stores'
+WHERE kind_of_business = 'Book stores'
 
-use data_vase
 select * from [dbo].[us_retail_sales]
+use data_vase
+
+select * from [dbo].[legislators_terms]

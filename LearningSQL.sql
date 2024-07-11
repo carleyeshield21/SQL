@@ -924,12 +924,69 @@ FROM [dbo].[us_retail_sales]
 WHERE kind_of_business = 'Book stores'
 
 select * from [dbo].[us_retail_sales]
-use data_vase
-
-select * from [dbo].[legislators_terms]
-select * from [dbo].[legislators]
 
 select address, COUNT(*) as not_null 
 from [dbo].[legislators_terms]
 where address IS NULL
 group by address
+
+select id_bioguide, MIN(term_start) as first_term
+from [dbo].[legislators_terms]
+group by id_bioguide
+order by id_bioguide
+
+select id_bioguide, COUNT(*) as bioguide_count
+from [dbo].[legislators_terms]
+group by id_bioguide
+
+select id_bioguide, term_start
+from [dbo].[legislators_terms]
+where id_bioguide = 'P000432'
+
+select table1.term_start, table1.term_end,table1.id_bioguide from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators_terms] as table2 on
+table1.id_bioguide = table2.id_bioguide
+
+select table1.id_bioguide, table1.full_name from [dbo].[legislators] as table1
+inner join [dbo].[legislators_terms] as table2 on table1.id_bioguide = table2.id_bioguide
+
+select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide
+
+select table1.id_bioguide, table1.full_name
+from [dbo].[legislators] as table1
+inner join(
+select id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, party
+from [dbo].[legislators_terms]) as table2 on table1.id_bioguide = table2.id_bioguide
+
+select * from(
+select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, table1.state, table1.party
+from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide) as table3
+
+select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, table1.state, table1.party
+from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide
+
+select table4.id_bioguide, table4.full_name from [dbo].[legislators] as table4
+inner join(
+select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, table1.state, table1.party
+from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide) as table5
+on table4.id_bioguide = table5.id_bioguide
+
+SELECT a.*, b.*
+FROM TableA a
+INNER JOIN TableB b
+ON a.ID = b.ID;
+
+select table4.id_bioguide, table4.full_name from [dbo].[legislators] as table4
+
+select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, table1.state, table1.party
+from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide
+
+select * from [dbo].[legislators_terms]
+select * from [dbo].[legislators]
+
+use data_vase

@@ -927,3 +927,9 @@ select * from [dbo].[us_retail_sales]
 use data_vase
 
 select * from [dbo].[legislators_terms]
+select * from [dbo].[legislators]
+
+select address, COUNT(*) as not_null 
+from [dbo].[legislators_terms]
+where address IS NULL
+group by address

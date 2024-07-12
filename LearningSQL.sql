@@ -975,16 +975,38 @@ from [dbo].[legislators_terms] as table1
 inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide) as table5
 on table4.id_bioguide = table5.id_bioguide
 
-SELECT a.*, b.*
-FROM TableA a
-INNER JOIN TableB b
-ON a.ID = b.ID;
-
 select table4.id_bioguide, table4.full_name from [dbo].[legislators] as table4
 
 select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, table1.state, table1.party
 from [dbo].[legislators_terms] as table1
 inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide
+
+select table4.id_bioguide, table4.full_name from [dbo].[legislators] as table4
+inner join(
+select table1.id_bioguide, DATEDIFF(YEAR, term_start, term_end) as term_period, table1.state, table1.party
+from [dbo].[legislators_terms] as table1
+inner join [dbo].[legislators] as table2 on table1.id_bioguide = table2.id_bioguide) as table5
+on table4.id_bioguide = table5.id_bioguide
+
+--query for joinin all columns from two tables
+--SELECT Table1.*, Table2.*
+--FROM Table1
+--INNER JOIN Table2
+--ON Table1.id = Table2.id;
+
+select id_bioguide, term_end, term_start, state, party
+into #table1 from [dbo].[legislators_terms]
+
+select id_bioguide, full_name
+into #table2 from [dbo].[legislators]
+
+select * from #table1
+select * from #table2
+
+SELECT #table1.*, #table2.*
+FROM #table1
+INNER JOIN #table2
+ON #table1.id_bioguide = #table2.id_bioguide;
 
 select * from [dbo].[legislators_terms]
 select * from [dbo].[legislators]

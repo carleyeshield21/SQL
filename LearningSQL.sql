@@ -1017,10 +1017,20 @@ INNER JOIN #table2
 ON #table2.id_bioguide = #table1.id_bioguide
 order by term_period desc, full_name asc
 
-SELECT #table1.*, #table3.*
+select * from(
+SELECT #table2.id_bioguide, #table2.full_name, #table1.term_period,#table1.party,#table1.state
 FROM #table1
-INNER JOIN #table3
-ON #table1.id_bioguide = #table3.id_bioguide;
+INNER JOIN #table2
+ON #table2.id_bioguide = #table1.id_bioguide) as nn
+
+--creating a new table from temporary tables
+select * into term_table from(
+SELECT #table2.id_bioguide, #table2.full_name, #table1.term_period,#table1.party,#table1.state
+FROM #table1
+INNER JOIN #table2
+ON #table2.id_bioguide = #table1.id_bioguide) as nn
+
+select * from [dbo].[term_table]
 
 select * from [dbo].[legislators_terms]
 select * from [dbo].[legislators]

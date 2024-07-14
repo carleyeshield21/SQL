@@ -994,19 +994,33 @@ on table4.id_bioguide = table5.id_bioguide
 --INNER JOIN Table2
 --ON Table1.id = Table2.id;
 
-select id_bioguide, term_end, term_start, state, party
+--creating temporary #table1
+select id_bioguide, term_end, term_start, state, party, DATEDIFF(YEAR,term_start, term_end) as term_period
 into #table1 from [dbo].[legislators_terms]
 
+--creating temporary #table2
 select id_bioguide, full_name
 into #table2 from [dbo].[legislators]
 
+--creating temporary #table3
+select id_bioguide, DATEDIFF(YEAR,term_start, term_end) as term_period
+into #table3 from [dbo].[legislators_terms]
+
 select * from #table1
 select * from #table2
+select * from #table3
 
-SELECT #table1.*, #table2.*
+--query using temporary tables to output term period
+SELECT #table2.id_bioguide, #table2.full_name, #table1.term_period,#table1.party,#table1.state
 FROM #table1
 INNER JOIN #table2
-ON #table1.id_bioguide = #table2.id_bioguide;
+ON #table2.id_bioguide = #table1.id_bioguide
+order by term_period desc, full_name asc
+
+SELECT #table1.*, #table3.*
+FROM #table1
+INNER JOIN #table3
+ON #table1.id_bioguide = #table3.id_bioguide;
 
 select * from [dbo].[legislators_terms]
 select * from [dbo].[legislators]

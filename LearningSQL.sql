@@ -1030,8 +1030,12 @@ FROM #table1
 INNER JOIN #table2
 ON #table2.id_bioguide = #table1.id_bioguide) as nn
 
-select * from [dbo].[term_table]
+select full_name, COUNT(*) full_name from [dbo].[term_table]
+group by full_name
+order by 2 desc
 
+
+select * from term_table order by full_name
 select * from [dbo].[legislators_terms]
 select * from [dbo].[legislators]
 

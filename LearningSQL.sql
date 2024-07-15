@@ -1034,8 +1034,13 @@ select full_name, COUNT(*) full_name from [dbo].[term_table]
 group by full_name
 order by 2 desc
 
+select full_name, SUM(term_period) as duration
+from [dbo].[term_table]
+group by full_name
+order by duration desc
 
 select * from term_table order by full_name
+
 select * from [dbo].[legislators_terms]
 select * from [dbo].[legislators]
 

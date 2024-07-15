@@ -1030,13 +1030,21 @@ FROM #table1
 INNER JOIN #table2
 ON #table2.id_bioguide = #table1.id_bioguide) as nn
 
+--query on counting how many times the name has occured
 select full_name, COUNT(*) full_name from [dbo].[term_table]
 group by full_name
 order by 2 desc
 
+--query on adding how many years the term for each person
 select full_name, SUM(term_period) as duration
 from [dbo].[term_table]
 group by full_name
+order by duration desc
+
+--query on adding how many years the term for each person including the state
+select full_name, SUM(term_period) as duration, state
+from [dbo].[term_table]
+group by full_name, state
 order by duration desc
 
 select * from term_table order by full_name
